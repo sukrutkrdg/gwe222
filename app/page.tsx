@@ -1,7 +1,7 @@
 // app/page.tsx
 // (Frame'i gösteren ana sayfa)
 
-import { getFrameMetadata } from '@coinbase/onchainkit';
+// import { getFrameMetadata } from '@coinbase/onchainkit';
 
 const getBaseUrl = () => {
   // Vercel'in kendi URL'sini kullanmasını sağlıyoruz
