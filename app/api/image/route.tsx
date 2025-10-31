@@ -1,8 +1,9 @@
 // app/api/image/route.tsx
 // (Bu dosya SADECE resmi oluşturur)
 
+import React from 'react';
 import { NextRequest } from 'next/server';
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 import { createPublicClient, http, formatGwei } from 'viem';
 import { mainnet, base } from 'viem/chains';
 
@@ -62,16 +63,31 @@ export async function GET(req: NextRequest): Promise<Response> {
         <div style={{ display: 'flex', color: '#58A6FF', marginBottom: 20 }}>
           /onchain-lab Gas Tracker (Faz 1)
         </div>
+
         <div style={{ display: 'flex', marginBottom: 15 }}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
-            width={50} // Düzeltme burada
-            height={50} // Düzeltme burada
+            width={50}
+            height={50}
             style={{ marginRight: 20 }}
           />
-          Ethereum: {parseFloat(eth).toFixed(2)} Gwei
+          Ethereum: {eth !== 'N/A' ? `${parseFloat(eth).toFixed(2)} Gwei` : 'N/A'}
         </div>
+
         <div style={{ display: 'flex' }}>
           <img
             src="https://raw.githubusercontent.com/base-org/brand-kit/main/logo/symbol/Base_Symbol_Blue.svg"
-            width={50} // Düzeltme
+            width={50}
+            height={50}
+            style={{ marginRight: 20 }}
+          />
+          Base: {base !== 'N/A' ? `${parseFloat(base).toFixed(2)} Gwei` : 'N/A'}
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  );
+}
