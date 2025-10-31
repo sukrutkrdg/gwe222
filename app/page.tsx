@@ -1,12 +1,12 @@
 // app/page.tsx
 // (Frame'i gösteren ana sayfa)
 
-import { getFrameMetadata } from '@coinbase/onchainkit';
+// import { getFrameMetadata } from '@coinbase/onchainkit';
 
 const getBaseUrl = () => {
   // Vercel'in kendi URL'sini kullanmasını sağlıyoruz
   return process.env.VERCEL_URL
-    ? `https{process.env.VERCEL_URL}`
+    ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000';
 };
 
@@ -17,17 +17,17 @@ export async function generateMetadata() {
   // Cache'i kırmak için 'Date.now()' ekliyoruz
   const imageUrl = `${baseUrl}/api/image?t=${Date.now()}`;
 
-  const frameMetadata = getFrameMetadata({
+  // Placeholder metadata, getFrameMetadata artık yok
+  const frameMetadata = {
     buttons: [
       {
         label: '🔄 Yenile',
-        action: 'post_redirect', // En basit yenileme yöntemi
+        action: 'post_redirect', // Basit yenileme yöntemi
       },
     ],
     image: { src: imageUrl, aspectRatio: '1.91:1' },
-    // Yenile'ye basınca /api/image'ı tekrar çağır
-    postUrl: `${baseUrl}/api/image`, 
-  });
+    postUrl: `${baseUrl}/api/image`,
+  };
 
   return {
     title: '/onchain-lab Gas Tracker',
@@ -43,9 +43,14 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ padding: 24, fontFamily: 'Arial, sans-serif' }}>
       <h1>/onchain-lab Gas Tracker Frame</h1>
-      <p>Bu uygulamayı Farcaster'da paylaşın.</p>
+      <p>Bu uygulamayı Farcaster'da paylaşabilirsiniz.</p>
+      <img
+        src={`${getBaseUrl()}/api/image?t=${Date.now()}`}
+        alt="Gas Tracker"
+        style={{ marginTop: 20, maxWidth: '100%', borderRadius: 12 }}
+      />
     </div>
   );
 }
