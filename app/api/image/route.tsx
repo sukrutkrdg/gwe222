@@ -74,23 +74,4 @@ export async function GET(req: NextRequest): Promise<Response> {
         <div style={{ display: 'flex' }}>
           <img
             src="https://raw.githubusercontent.com/base-org/brand-kit/main/logo/symbol/Base_Symbol_Blue.svg"
-            width={50} // Düzeltme burada
-            height={50} // Düzeltme burada
-            style={{ marginRight: 20 }}
-          />
-          Base: {parseFloat(base).toFixed(2)} Gwei
-        </div>
-        <div style={{ fontSize: 24, color: '#8B949E', marginTop: 30 }}>
-          Updated: {new Date().toLocaleTimeString('en-US', { timeZone: 'Europe/Istanbul' })}
-        </div>
-      </div>
-    ),
-    {
-      width: 800,
-      height: 418, // Farcaster için ideal oran
-    },
-  );
-}
-
-// Edge runtime'da çalışmasını sağla (Satori/ImageResponse için önemlidir)
-export const runtime = 'edge';
+            width={50} // Düzeltme
