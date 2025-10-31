@@ -1,0 +1,57 @@
+// app/api/image/route.tsx
+// (Bu dosya SADECE resmi oluşturur)
+
+import { NextRequest } from 'next/server';
+import { ImageResponse } from 'next/server';
+import { createPublicClient, http, formatGwei } from 'viem';
+import { mainnet, base } from 'viem/chains';
+
+// Viem istemcilerini .env dosyasındaki URL'ler ile oluştur
+const ethClient = createPublicClient({
+  chain: mainnet,
+  transport: http(process.env.ETH_RPC_URL),
+});
+
+const baseClient = createPublicClient({
+  chain: base,
+  transport: http(process.env.BASE_RPC_URL),
+});
+
+// Gas ücretlerini çeken asenkron fonksiyon
+async function getGasPrices() {
+  try {
+    const [ethGas, baseGas] = await Promise.all([
+      ethClient.getGasPrice(),
+      baseClient.getGasPrice(),
+    ]);
+
+    // GWEI formatına çevir
+    return {
+      eth: formatGwei(ethGas),
+      base: formatGwei(baseGas),
+    };
+  } catch (error) {
+    console.error('Error fetching gas prices:', error);
+    return { eth: 'N/A', base: 'N/A' };
+  }
+}
+
+// Bu endpoint'e bir GET isteği geldiğinde bu çalışır
+export async function GET(req: NextRequest): Promise<Response> {
+  const { eth, base } = await getGasPrices();
+
+  // Dinamik olarak o anki resmi oluştur
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#0D1117',
+          color: '#C9D1D9',
+          fontFamily: '"Arial", sans-serif',
+          fontSize: 48,
