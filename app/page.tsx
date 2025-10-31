@@ -1,10 +1,7 @@
 // app/page.tsx
 // (Frame'i gösteren ana sayfa)
 
-// import { getFrameMetadata } from '@coinbase/onchainkit';
-
 const getBaseUrl = () => {
-  // Vercel'in kendi URL'sini kullanmasını sağlıyoruz
   return process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000';
@@ -12,17 +9,13 @@ const getBaseUrl = () => {
 
 export async function generateMetadata() {
   const baseUrl = getBaseUrl();
-  
-  // Resim olarak /api/image endpoint'ini göster
-  // Cache'i kırmak için 'Date.now()' ekliyoruz
   const imageUrl = `${baseUrl}/api/image?t=${Date.now()}`;
 
-  // Placeholder metadata, getFrameMetadata artık yok
   const frameMetadata = {
     buttons: [
       {
         label: '🔄 Yenile',
-        action: 'post_redirect', // Basit yenileme yöntemi
+        action: 'post_redirect',
       },
     ],
     image: { src: imageUrl, aspectRatio: '1.91:1' },
@@ -43,13 +36,33 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <div style={{ padding: 24, fontFamily: 'Arial, sans-serif' }}>
-      <h1>/onchain-lab Gas Tracker Frame</h1>
-      <p>Bu uygulamayı Farcaster'da paylaşabilirsiniz.</p>
+    <div
+      style={{
+        backgroundColor: '#0D1117', // koyu arka plan
+        color: '#C9D1D9', // açık yazı rengi
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Arial, sans-serif',
+        textAlign: 'center',
+        padding: 24,
+      }}
+    >
+      <h1 style={{ fontSize: 32, color: '#58A6FF' }}>/onchain-lab Gas Tracker Frame</h1>
+      <p style={{ fontSize: 18, marginBottom: 24 }}>
+        Bu uygulamayı Farcaster'da paylaşabilirsiniz.
+      </p>
       <img
         src={`${getBaseUrl()}/api/image?t=${Date.now()}`}
         alt="Gas Tracker"
-        style={{ marginTop: 20, maxWidth: '100%', borderRadius: 12 }}
+        style={{
+          marginTop: 20,
+          maxWidth: '90%',
+          borderRadius: 12,
+          border: '2px solid #30363D',
+        }}
       />
     </div>
   );
