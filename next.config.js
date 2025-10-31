@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: ["example.com"],
-  },
+  // reactStrictMode: true, // (Kapalı kalması React 19 RC için daha güvenli)
 };
 
 module.exports = nextConfig;
