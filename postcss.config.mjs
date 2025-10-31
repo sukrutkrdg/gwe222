@@ -1,7 +1,4 @@
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+// Tailwind'i aramaması için bu dosyayı boşaltıyoruz.
+module.exports = {
+  plugins: {},
 };
-
-export default config;
