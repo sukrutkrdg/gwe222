@@ -1,4 +1,7 @@
 // app/page.tsx
+
+
+// Farcaster lansman testi
 // (Frame'i gösteren ana sayfa)
 
 const getBaseUrl = () => {
